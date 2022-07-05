@@ -100,11 +100,20 @@ infostr = yalmiperror(problem,interfacedata.solver.tag);
 % Standard interface 
 output = createOutputStructure(x,D_struc,[],problem,infostr,solverinput,solveroutput,solvertime);
 output.qcDual      = qcDual;
-output.work = result.work;
-output.gap = result.mipgap;
-output.MILPstats.itercount = result.itercount;
-output.MILPstats.baritercount = result.baritercount;
-output.MILPstats.nodecount = result.nodecount;
+
+try
+    output.work = result.work;
+    output.MILPstats.itercount = result.itercount;
+    output.MILPstats.baritercount = result.baritercount;
+    output.MILPstats.nodecount = result.nodecount;
+    output.gap = result.mipgap;
+catch
+    output.work = [];
+    output.MILPstats.itercount = [];
+    output.MILPstats.baritercount = [];
+    output.MILPstats.nodecount = [];
+    output.gap = [];
+end
 
 
 

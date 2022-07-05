@@ -416,9 +416,15 @@ diagnostic.yalmipversion = yalmip('ver');
 diagnostic.matlabversion = version;
 diagnostic.yalmiptime = etime(clock,yalmiptime)-output.solvertime;
 diagnostic.solvertime = output.solvertime;
-diagnostic.work = output.work;
-diagnostic.gap = output.gap;
-diagnostic.MILPstats = output.MILPstats;
+try
+    diagnostic.work = output.work;
+    diagnostic.gap = output.gap;
+    diagnostic.MILPstats = output.MILPstats;
+catch
+    diagnostic.work = [];
+    diagnostic.gap = [];
+    diagnostic.MILPstats = [];
+end
 try
     diagnostic.info = output.infostr;
 catch   
